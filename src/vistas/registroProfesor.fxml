@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegistroProfesor">
    <children>
-      <Button layoutX="78.0" layoutY="283.0" mnemonicParsing="false" text="Registrar" />
+      <Button fx:id="btnRegistrar" layoutX="78.0" layoutY="283.0" mnemonicParsing="false" onAction="#registrarProfesor" text="Registrar" />
       <Label layoutX="24.0" layoutY="43.0" text="Nombre" />
       <Label layoutX="24.0" layoutY="112.0" text="Apellido" />
       <Label layoutX="24.0" layoutY="183.0" text="CI" />

@@ -73,4 +73,14 @@ public class Estudiante extends Persona{
 
     }
 
+    public static void registrarDatosEstudiante(String nombre, String apellido, String ci, int celular) throws SQLException{
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps;
+        
+        ps = con.prepareStatement("INSERT INTO `estudiante` (`id_Estudiantes`, `nombre`, `apellido`, `ci`, `celular`) VALUES (NULL, '"+nombre+"', '"+apellido+"', '"+ci+"', '"+celular+"'); ");
+        ps.execute();
+    }
+
 }

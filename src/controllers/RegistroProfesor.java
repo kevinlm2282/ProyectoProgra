@@ -22,6 +22,9 @@ public class RegistroProfesor implements Initializable{
     private Button btnAtras;
 
     @FXML
+    private Button btnRegistrar;
+
+    @FXML
     private TableColumn<Docente, String> colApellido;
 
     @FXML
@@ -46,6 +49,13 @@ public class RegistroProfesor implements Initializable{
     void irAtras(ActionEvent event) {
         Stage stage = (Stage) this.btnAtras.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    void registrarProfesor(ActionEvent event) throws SQLException {
+        Docente docente = new Docente(null, null, null, null, null, null);
+        docente.registrarDatosProfesor(tfNombre.getText(), tfApellido.getText(), tfNombre.getText());
+
     }
 
     @Override

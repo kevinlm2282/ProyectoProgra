@@ -66,4 +66,13 @@ public class Docente extends Persona {
         return obs;
 
     }
+    public static void registrarDatosProfesor(String nombre, String apellido, String ci) throws SQLException{
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps;
+        
+        ps = con.prepareStatement("INSERT INTO `profesor` (`id_Profesor`, `nombre`, `apellido`, `ci`) VALUES (NULL, '"+nombre+"', '"+apellido+"', '"+ci+"'); ");
+        ps.execute();
+    }
 }

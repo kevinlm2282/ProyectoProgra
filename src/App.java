@@ -1,10 +1,6 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.Scanner;
 
-import conect.Conexion;
 import utils.utilEstudiante;
 import utils.utilProfesor;;
 
@@ -39,7 +35,7 @@ public class App {
 				//Ejemplo de switch case en Java
 				switch(select){
 				case 1:
-                    controllerEstudiante.leerDatos("estudiante");				
+                    utilEstudiante.leerDatos("estudiante");				
 					break;
 				case 2:
                     System.out.println("Ingresa nombre: ");

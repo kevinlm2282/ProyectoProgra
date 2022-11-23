@@ -27,7 +27,6 @@ public class Administrador {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/registroEstudiante.fxml"));
             Parent root = loader.load();
-            RegistroEstudiante controlador = loader.getController();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

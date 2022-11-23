@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import models.Estudiante;
+import utils.utilEstudiante;
 
 public class RegistroEstudiante implements Initializable{
 
@@ -59,13 +60,12 @@ public class RegistroEstudiante implements Initializable{
     }
 
     @FXML
-    void registrar(ActionEvent event) {
-
+    void registrar(ActionEvent event) throws NumberFormatException, SQLException {
+        Estudiante estudiante = new Estudiante(tfNombre.getText(), tfApellido.getText(), tfCi.getText(), Integer.parseInt(tfCelular.getText()));
+        estudiante.registrarDatosEstudiante(tfNombre.getText(), tfApellido.getText(), tfCi.getText(), Integer.parseInt(tfCelular.getText()));
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
+    void leer(){
         String nombre=""; String apellido=""; String ci=""; Integer celular=0;
         Estudiante estudiante = new Estudiante(nombre, apellido, ci, celular);
 
@@ -75,13 +75,19 @@ public class RegistroEstudiante implements Initializable{
             this.colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
             this.colCelular.setCellValueFactory(new PropertyValueFactory("celular"));
             ObservableList<Estudiante> items = estudiante.getEstudiantes();
-            this.tblEstudiante.setItems(items);
+            this.tblEstudiante.setItems(items);            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // TODO Auto-generated method stub
+        leer();       
         
     }
+    
 
 }
