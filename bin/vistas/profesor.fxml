@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Profesor">
+   <children>
+      <TableView fx:id="tblProfesor" layoutX="207.0" layoutY="39.0" prefHeight="325.0" prefWidth="366.0">
+        <columns>
+          <TableColumn fx:id="colNombre" prefWidth="223.0" text="Nombre" />
+          <TableColumn fx:id="colNota" prefWidth="142.0" text="Nota" />
+        </columns>
+      </TableView>
+      <TextField fx:id="tfValor" layoutX="30.0" layoutY="98.0" />
+      <ComboBox fx:id="combEstudiante" layoutX="30.0" layoutY="175.0" prefWidth="150.0" />
+      <Label layoutX="30.0" layoutY="81.0" text="Valor" />
+      <Label layoutX="30.0" layoutY="158.0" text="Estudiante" />
+      <Button fx:id="btnAtras" layoutX="32.0" layoutY="339.0" mnemonicParsing="false" onAction="#irAtras" text="Atras" />
+   </children>
+</AnchorPane>

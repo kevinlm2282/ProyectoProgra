@@ -2,12 +2,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Scanner;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
-
-import models.Docente;
-import models.Estudiante;
+import conect.Conexion;
+import utils.utilEstudiante;
+import utils.utilProfesor;;
 
 public class App {
     static Scanner scanner = new Scanner(System.in); //Sirve para recoger texto por consola
@@ -16,7 +15,8 @@ public class App {
     public static void main(String[] args) throws Exception {
         String nombre, apellido, ci;
         int celular;
-
+        utilEstudiante controllerEstudiante = new utilEstudiante();
+        utilProfesor controllerProfesor = new utilProfesor();
         
 		//Mientras la opción elegida sea 0, preguntamos al usuario
 		while(select != 0){
@@ -38,10 +38,10 @@ public class App {
 	
 				//Ejemplo de switch case en Java
 				switch(select){
-				case 1: 
-                    leerDatos("estudiante");					
+				case 1:
+                    controllerEstudiante.leerDatos("estudiante");				
 					break;
-				case 2: 
+				case 2:
                     System.out.println("Ingresa nombre: ");
                     nombre = scanner.nextLine();
                     System.out.println("Ingresa apellido: ");
@@ -50,25 +50,25 @@ public class App {
                     ci = scanner.nextLine();
                     System.out.println("Ingresa celular: ");
                     celular = scanner.nextInt();
-                    registrarDatosEstudiante(nombre,apellido,ci,celular);
+                    controllerEstudiante.registrarDatosEstudiante(nombre, apellido, ci, celular);
 					System.out.println("Dato registrado!");
 					break;
-				case 3: 					
-                    leerDatosProf("profesor");	
+				case 3:
+                    controllerProfesor.leerDatosProf("profesor");
 					break;
-				case 4: 
+				case 4:
                     System.out.println("Ingresa nombre: ");
                     nombre = scanner.nextLine();
                     System.out.println("Ingresa apellido: ");
                     apellido = scanner.nextLine();
                     System.out.println("Ingresa documento de identidad: ");
                     ci = scanner.nextLine();
-                    registrarDatosProfesor(nombre,apellido,ci);
+                    controllerProfesor.registrarDatosProfesor(nombre, apellido, ci);
                     System.out.println("Dato registrado!");
 					break;
                 case 5: 					
                     System.out.println("La lista de calificaciones es:");
-                    leerDatos("calificaciones");		
+                    //leerDatos("calificaciones");		
 					break;
 				case 6: 
                     System.out.println("Ingresa nombre: ");
@@ -77,7 +77,7 @@ public class App {
                     apellido = scanner.nextLine();
                     System.out.println("Ingresa documento de identidad: ");
                     ci = scanner.nextLine();
-                    registrarDatosProfesor(nombre,apellido,ci);
+                    //registrarDatosProfesor(nombre,apellido,ci);
                     System.out.println("Dato registrado!");
 					break;
 				case 0: 
@@ -98,67 +98,4 @@ public class App {
 
 	}
 	
-
-    public static void leerDatos(String nombreTabla) throws SQLException{
-        Conexion conexion = new Conexion();
-        Connection con = conexion.getConnection();
-
-        PreparedStatement ps;
-        ResultSet res;
-        
-        ps = con.prepareStatement("SELECT * FROM "+nombreTabla);
-        res = ps.executeQuery();
-
-        System.out.println("\n-----------------------------");
-        System.out.println("\nLa lista de estudiantes es:\n");
-        System.out.println("\nNombre\t\tApellido\tCi\tCelular");
-
-        while (res.next()) {
-            String nombre = res.getString("nombre");
-            String apellido = res.getString("apellido");
-            String ci = res.getString("ci");
-            int celular = res.getInt("celular");
-            System.out.println(nombre + "\t\t" + apellido + "\t\t" + ci+"\t"+celular);
-        }  
-    }
-    public static void leerDatosProf(String nombreTabla) throws SQLException{
-        Conexion conexion = new Conexion();
-        Connection con = conexion.getConnection();
-
-        PreparedStatement ps;
-        ResultSet res;
-        
-        ps = con.prepareStatement("SELECT * FROM "+nombreTabla);
-        res = ps.executeQuery();
-
-        System.out.println("\n-----------------------------");
-        System.out.println("\nLa lista de profesores es:\n");
-        System.out.println("\nNombre\t\tApellido\tCi");
-
-        while (res.next()) {
-            String nombre = res.getString("nombre");
-            String apellido = res.getString("apellido");
-            String ci = res.getString("ci");
-            System.out.println(nombre + "\t\t" + apellido + "\t\t" + ci);
-        }  
-    }
-
-    public static void registrarDatosEstudiante(String nombre, String apellido, String ci, int celular) throws SQLException{
-        Conexion conexion = new Conexion();
-        Connection con = conexion.getConnection();
-
-        PreparedStatement ps;
-        
-        ps = con.prepareStatement("INSERT INTO `estudiante` (`id_Estudiantes`, `nombre`, `apellido`, `ci`, `celular`) VALUES (NULL, '"+nombre+"', '"+apellido+"', '"+ci+"', '"+celular+"'); ");
-        ps.execute();
-    }
-    public static void registrarDatosProfesor(String nombre, String apellido, String ci) throws SQLException{
-        Conexion conexion = new Conexion();
-        Connection con = conexion.getConnection();
-
-        PreparedStatement ps;
-        
-        ps = con.prepareStatement("INSERT INTO `profesor` (`id_Profesor`, `nombre`, `apellido`, `ci`) VALUES (NULL, '"+nombre+"', '"+apellido+"', '"+ci+"'); ");
-        ps.execute();
-    }
 }

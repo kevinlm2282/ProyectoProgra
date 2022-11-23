@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EstudianteController">
+   <children>
+      <Button fx:id="tbnSalir" layoutX="524.0" layoutY="351.0" mnemonicParsing="false" onAction="#irSalir" text="Salir" />
+      <TableView fx:id="tblEstudiante" layoutX="41.0" layoutY="87.0" prefHeight="289.0" prefWidth="471.0">
+        <columns>
+          <TableColumn fx:id="colMateria" prefWidth="207.0" text="Materia" />
+          <TableColumn fx:id="colNota" prefWidth="201.0" text="Nota" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="comEstudiante" layoutX="41.0" layoutY="39.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
