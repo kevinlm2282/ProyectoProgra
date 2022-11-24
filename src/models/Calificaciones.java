@@ -13,7 +13,7 @@ import models.Calificaciones;
 public class Calificaciones implements FuncionesBasicas {
     //Variables Locales
     private double valor;
-    private String idcurso,idEstudiante;
+    private String idcurso,idEstudiante,nombre,apellido;
 
     //Constructor
     public Calificaciones(double valor, String idcurso, String idEstudiante) {
@@ -21,6 +21,14 @@ public class Calificaciones implements FuncionesBasicas {
         this.idcurso = idcurso;
         this.idEstudiante = idEstudiante;
     }
+
+
+    public Calificaciones(String nombre, String apellido, double valor) {
+        this.valor = valor;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
 
     //Metodos de la interfaz FuncionesBasicas.java
     @Override
@@ -42,6 +50,29 @@ public class Calificaciones implements FuncionesBasicas {
     }
 
     //Getters y Setters
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
+
+    public String getApellido() {
+        return apellido;
+    }
+
+
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public double getValor() {
         return valor;
     }
@@ -99,6 +130,41 @@ public class Calificaciones implements FuncionesBasicas {
 
         return obs;
 
+    }
+
+    public ObservableList<Calificaciones> getCalificacionesNombres() throws SQLException{
+        ObservableList<Calificaciones> obs = FXCollections.observableArrayList();
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps;
+        ResultSet res;
+        
+        ps = con.prepareStatement("SELECT * FROM `estudiante` a, `calificaciones` b WHERE 1;");
+        
+        res = ps.executeQuery();
+
+        while (res.next()) {
+            String nombre = res.getString("nombre");
+            String apellido = res.getString("apellido");
+            Double valor = res.getDouble("valor");
+            Calificaciones calificaciones2 = new Calificaciones(nombre,apellido,valor);
+
+            obs.add(calificaciones2);
+            System.out.println(valor + "\t\t" + nombre + "\t\t" + apellido);
+        }  
+
+        return obs;
+
+    }
+    public static void registrarCalificaciones(String valor, String idCurso, String idEstudiante) throws SQLException{
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();
+
+        PreparedStatement ps;
+        
+        ps = con.prepareStatement("INSERT INTO `calificaciones` (`id`, `valor`, `curso_idCurso`, `estudiante_idEstudiante`) VALUES (NULL, '"+valor+"', '"+idCurso+"', '"+idEstudiante+"');");
+        ps.execute();
     }
 
     public static void registrarDatosEstudiante(String nombre, String apellido, String ci, int celular) throws SQLException{
