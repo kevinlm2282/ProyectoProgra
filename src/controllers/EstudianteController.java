@@ -18,6 +18,8 @@ import models.Calificaciones;
 import models.Estudiante;
 
 public class EstudianteController implements Initializable{
+    String nombre=""; String apellido=""; String ci=""; Integer celular=0;Integer idEstudiante=0;
+    Estudiante estudiante = new Estudiante(nombre, apellido, ci, celular,idEstudiante);
 
     @FXML
     private TableColumn<Calificaciones, String> colMateria;
@@ -42,26 +44,29 @@ public class EstudianteController implements Initializable{
         Stage stage = (Stage) this.tbnSalir.getScene().getWindow();
         stage.close();
     }
-    public void initCombox() throws SQLException{
-        String nombre=""; String apellido=""; String ci=""; Integer celular=0;
-        Estudiante estudiante = new Estudiante(nombre, apellido, ci, celular);
+    public void initCombox() throws SQLException{        
         ObservableList<Estudiante> obsEstudiante = estudiante.getEstudiantes();
+        System.out.println("linea 49: "+estudiante.getIdEstudiante());
         this.comEstudiante.setItems(obsEstudiante);
     }
 
     @FXML
     void consultar(ActionEvent event) {
-        leer();
+        String[] idEstudianteCadena =  comEstudiante.getValue().toString().split("-");
+            System.out.println("se busco el id: "+idEstudianteCadena[0]);
+            leer(idEstudianteCadena[0]);
+            tblEstudiante.refresh();
+            leer(idEstudianteCadena[0]);
     }
 
-    void leer(){
-        int idCurso=0; int idEstudiante=0; double valor=0.0;
+    void leer(String idBuscar){
+        String idCurso=""; String idEstudiante=""; double valor=0.0;
         Calificaciones calificaciones = new Calificaciones(valor,idCurso,idEstudiante);
 
         try {
-            this.colMateria.setCellValueFactory(new PropertyValueFactory("idCurso"));
+            this.colMateria.setCellValueFactory(new PropertyValueFactory("idcurso"));
             this.colNota.setCellValueFactory(new PropertyValueFactory("valor"));
-            ObservableList<Calificaciones> items = calificaciones.getCalificaciones(null);
+            ObservableList<Calificaciones> items = calificaciones.getCalificaciones(idBuscar);
             this.tblEstudiante.setItems(items);            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -74,6 +79,8 @@ public class EstudianteController implements Initializable{
         // TODO Auto-generated method stub
         try {
             initCombox();
+            leer("1");
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -43,8 +43,8 @@ public class Profesor implements Initializable{
     }
 
     public void initCombox() throws SQLException{
-        String nombre=""; String apellido=""; String ci=""; Integer celular=0;
-        Estudiante estudiante = new Estudiante(nombre,apellido,ci,celular);
+        String nombre=""; String apellido=""; String ci=""; Integer celular=0;Integer idEstudiante=0;
+        Estudiante estudiante = new Estudiante(nombre,apellido,ci,celular,idEstudiante);
         ObservableList<Estudiante> obsEstudiante = estudiante.getEstudiantes();
         this.combEstudiante.setItems(obsEstudiante);
     }

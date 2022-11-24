@@ -13,20 +13,35 @@ public class Estudiante extends Persona{
 
     private String codigoEstudiante;
     private String grado;
+    private int idEstudiante;
 
 
     
+    public Estudiante(String nombre, String apellido, String ci, Integer celular, String codigoEstudiante, String grado,
+            int idEstudiante) {
+        super(nombre, apellido, ci, celular);
+        this.codigoEstudiante = codigoEstudiante;
+        this.grado = grado;
+        this.idEstudiante = idEstudiante;
+    }
+
+    public Estudiante(String nombre, String apellido, String ci, Integer celular, int idEstudiante) {
+        super(nombre, apellido, ci, celular);
+        this.idEstudiante = idEstudiante;
+    }
+
     public Estudiante(String nombre, String apellido, String ci, Integer celular) {
         super(nombre, apellido, ci, celular);
     }
 
-    public Estudiante(String nombre, String apellido, String ci, Integer celular, String codigoEstudiante,
-            String grado) {
-        super(nombre, apellido, ci, celular);
-        this.codigoEstudiante = codigoEstudiante;
-        this.grado = grado;
+    public int getIdEstudiante() {
+        return idEstudiante;
     }
 
+    public void setIdEstudiante(int idEstudiante) {
+        this.idEstudiante = idEstudiante;
+    }
+    
     public String getCodigoEstudiante() {
         return codigoEstudiante;
     }
@@ -45,7 +60,7 @@ public class Estudiante extends Persona{
 
     @Override
     public String toString() {
-        return getNombre()+" "+getApellido();
+        return getIdEstudiante()+"-"+getNombre()+" "+getApellido();
     }
 
     public ObservableList<Estudiante> getEstudiantes() throws SQLException{
@@ -64,7 +79,8 @@ public class Estudiante extends Persona{
             String apellido = res.getString("apellido");
             String ci = res.getString("ci");
             int celular = res.getInt("celular");
-            Estudiante estudiante = new Estudiante(nombre, apellido, ci, celular,"1","Primero");
+            int idEstudiante = res.getInt("id_Estudiantes");
+            Estudiante estudiante = new Estudiante(nombre, apellido, ci, celular,idEstudiante);
             obs.add(estudiante);
             System.out.println(nombre + "\t\t" + apellido + "\t\t" + ci+"\t"+celular);
         }  
@@ -82,5 +98,6 @@ public class Estudiante extends Persona{
         ps = con.prepareStatement("INSERT INTO `estudiante` (`id_Estudiantes`, `nombre`, `apellido`, `ci`, `celular`) VALUES (NULL, '"+nombre+"', '"+apellido+"', '"+ci+"', '"+celular+"'); ");
         ps.execute();
     }
+
 
 }

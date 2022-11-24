@@ -13,10 +13,10 @@ import models.Calificaciones;
 public class Calificaciones implements FuncionesBasicas {
     //Variables Locales
     private double valor;
-    private int idcurso,idEstudiante;
+    private String idcurso,idEstudiante;
 
     //Constructor
-    public Calificaciones(double valor, int idcurso, int idEstudiante) {
+    public Calificaciones(double valor, String idcurso, String idEstudiante) {
         this.valor = valor;
         this.idcurso = idcurso;
         this.idEstudiante = idEstudiante;
@@ -50,19 +50,19 @@ public class Calificaciones implements FuncionesBasicas {
         this.valor = valor;
     }
 
-    public int getIdcurso() {
+    public String getIdcurso() {
         return idcurso;
     }
 
-    public void setIdcurso(int idcurso) {
+    public void setIdcurso(String idcurso) {
         this.idcurso = idcurso;
     }
 
-    public int getIdEstudiante() {
+    public String getIdEstudiante() {
         return idEstudiante;
     }
 
-    public void setIdEstudiante(int idEstudiante) {
+    public void setIdEstudiante(String idEstudiante) {
         this.idEstudiante = idEstudiante;
     }
     //ToString()
@@ -84,8 +84,14 @@ public class Calificaciones implements FuncionesBasicas {
         while (res.next()) {
             int idEstudiante = res.getInt("estudiante_idEstudiante");
             int idcurso = res.getInt("curso_idCurso");
+            String idEstudianteSt = "";
+            String idCursoSt = "";
+            if(idcurso==1){idCursoSt="Literatura";}
+            if(idcurso==2){idCursoSt="Religion";}
+            if(idcurso==3){idCursoSt="Matematicas";}
+            if(idcurso==4){idCursoSt="Fisica";}
             Double valor = res.getDouble("valor");
-            Calificaciones calificaciones = new Calificaciones(valor,idcurso,idEstudiante);
+            Calificaciones calificaciones = new Calificaciones(valor,idCursoSt,idEstudianteSt);
 
             obs.add(calificaciones);
             System.out.println(valor + "\t\t" + idcurso + "\t\t" + idEstudiante);

@@ -13,5 +13,6 @@
         </columns>
       </TableView>
       <ComboBox fx:id="comEstudiante" layoutX="41.0" layoutY="39.0" prefWidth="150.0" />
+      <Button fx:id="btnConsultar" layoutX="216.0" layoutY="39.0" mnemonicParsing="false" onAction="#consultar" text="Consultar" />
    </children>
 </AnchorPane>

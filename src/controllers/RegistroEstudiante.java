@@ -63,6 +63,8 @@ public class RegistroEstudiante implements Initializable{
     void registrar(ActionEvent event) throws NumberFormatException, SQLException {
         Estudiante estudiante = new Estudiante(tfNombre.getText(), tfApellido.getText(), tfCi.getText(), Integer.parseInt(tfCelular.getText()));
         estudiante.registrarDatosEstudiante(tfNombre.getText(), tfApellido.getText(), tfCi.getText(), Integer.parseInt(tfCelular.getText()));
+        tblEstudiante.refresh();
+        leer();
     }
 
     void leer(){
@@ -75,7 +77,8 @@ public class RegistroEstudiante implements Initializable{
             this.colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
             this.colCelular.setCellValueFactory(new PropertyValueFactory("celular"));
             ObservableList<Estudiante> items = estudiante.getEstudiantes();
-            this.tblEstudiante.setItems(items);            
+            this.tblEstudiante.setItems(items);   
+            tblEstudiante.refresh();         
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -85,9 +88,8 @@ public class RegistroEstudiante implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
-        leer();       
+        leer();
         
     }
     
-
 }

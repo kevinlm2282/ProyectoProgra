@@ -55,12 +55,16 @@ public class RegistroProfesor implements Initializable{
     void registrarProfesor(ActionEvent event) throws SQLException {
         Docente docente = new Docente(null, null, null, null, null, null);
         docente.registrarDatosProfesor(tfNombre.getText(), tfApellido.getText(), tfNombre.getText());
+        tblProfesor.refresh();
+        leer();
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
+            leer();
+    }
+    void leer(){
         String nombre=""; String apellido=""; String ci=""; Integer celular=0;
         Docente docente = new Docente(nombre, apellido, ci, celular, apellido, ci);
 
@@ -74,7 +78,6 @@ public class RegistroProfesor implements Initializable{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
     }
 
 }
